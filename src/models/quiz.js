@@ -3,23 +3,33 @@ const RequestHelper = require('../helpers/request_helper.js');
 
 const Quiz = function () {
   this.questions = null;
+  this.score = 0;
 };
 
 Quiz.prototype.bindEvents = function () {
+  PubSub.subscribe('QuizFormView:form-submitted', (evt) => {
+    this.getQuestions(evt.detail);
+  })
+
+
   PubSub.subscribe('Answer:answer-made', (evt) => {
     const question = this.questions[evt.detail.questionNumber]
 
     if (!question.answered){
       PubSub.publish('Quiz:question-answer-made', evt.detail);
       this.markQuestionAnswered(evt.detail.questionNumber);
-      console.log('beep');
+    };
+
+    if (evt.detail.value){
+      this.score++;
+      PubSub.publish('Quiz:score-updated', this.score);
     };
 
   });
 };
 
-Quiz.prototype.getQuestions = function () {
-  const helper = new RequestHelper('https://opentdb.com/api.php?amount=10&difficulty=medium&type=boolean');
+Quiz.prototype.getQuestions = function (number) {
+  const helper = new RequestHelper(`https://opentdb.com/api.php?amount=${number}&difficulty=medium&type=boolean`);
 
   helper.get()
     .then((data)=> {
@@ -29,6 +39,7 @@ Quiz.prototype.getQuestions = function () {
     })
     .catch((err) => {
       console.log(err);
+      PubSub.publish('Quiz:error', err);
     });
 };
 

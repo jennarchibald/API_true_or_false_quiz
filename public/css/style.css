@@ -9,7 +9,26 @@ body {
   background-color: black;
 }
 
-h1 {
+@-webkit-keyframes blinker {
+  from {opacity: 1.0;}
+  78% {opacity:1.0}
+  80% {opacity:0.0}
+  82% {opacity:1.0}
+  to {opacity: 1.0;}
+}
+img{
+  text-decoration: blink;
+  -webkit-animation-name: blinker;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count:infinite;
+  -webkit-animation-timing-function:ease-in-out;
+  -webkit-animation-direction: alternate;
+  margin: 40px;
+  border: 1px solid #302C2D;
+  border-radius: 40px;
+}
+
+h1, form, p.error {
   color: white;
 }
 
@@ -19,7 +38,7 @@ h2 {
 
 button {
   height: 3em;
-  width: 12em;
+  width: 20%;
   font-size: 1.2em;
   border: 1px solid darkgray;
   border-radius: 5px;
@@ -32,7 +51,8 @@ button:focus {
 }
 
 .question {
-  width: 75%;
+  width: 76%;
+  height: 50%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 2em;
@@ -42,16 +62,32 @@ button:focus {
   background-color: ivory;
   border-radius: 10px;
   border: 1px solid darkgray;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+
+  position: absolute;
+  left: -100%;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 3s;
+  animation: slide 0.5s forwards;
+}
+
+@-webkit-keyframes slide {
+  100% { left: 11%;}
+}
+
+.answer {
+  width: 100%;
 }
 
 .score-container {
   position: fixed;
-  top: 0;
-  right: 0;
-  padding: 20px;
-  border-bottom-left-radius: 10px;
-  border-left: 2px solid black;
-  border-bottom: 2px solid black;
+  width: 100%;
+  bottom: 0;
+  left: 0;
   background-color: white;
 }
 

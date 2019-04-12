@@ -5,35 +5,49 @@ const he = require('he');
 const QuestionView = function(container, question) {
   this.container = container;
   this.question = question;
+  this.div = null;
+};
+
+QuestionView.prototype.bindEvents = function () {
+  // PubSub.subscribe('Answer:answer-made', (evt) => {
+  //   if(evt.detail.questionNumber === this.question.number){
+  //     this.div.classList.add('answered');
+  //   };
+  // });
 };
 
 QuestionView.prototype.render = function () {
   const div = document.createElement('div');
+  this.div = div;
   div.classList.add(`question-${this.question.number}`);
   div.classList.add(`question`);
   this.container.appendChild(div);
-  this.displayCategory(div);
-  this.displayQuestion(div);
-  this.displayAnswers(div);
+  this.displayCategory();
+  this.displayQuestion();
+  this.displayAnswers();
 };
 
-QuestionView.prototype.displayCategory = function (div) {
+QuestionView.prototype.displayCategory = function () {
   const categoryHeading = document.createElement('h2');
   categoryHeading.textContent = he.decode(this.question.category);
-  div.appendChild(categoryHeading);
+  this.div.appendChild(categoryHeading);
 };
 
-QuestionView.prototype.displayQuestion = function (div) {
+QuestionView.prototype.displayQuestion = function () {
   const questionParagraph = document.createElement('p');
   questionParagraph.textContent = he.decode(this.question.question);
-  div.appendChild(questionParagraph);
+  this.div.appendChild(questionParagraph);
 };
 
-QuestionView.prototype.displayAnswers = function (div) {
+QuestionView.prototype.displayAnswers = function () {
   const answers = this.getAnswers();
 
-  const correctAnswer = new AnswerView(div, answers.correct_answer, 'correct');
-  const wrongAnswer = new AnswerView(div, answers.wrong_answer, 'wrong');
+  const answerDiv = document.createElement('div');
+  answerDiv.classList.add('answer');
+  this.div.appendChild(answerDiv);
+
+  const correctAnswer = new AnswerView(answerDiv, answers.correct_answer, 'correct');
+  const wrongAnswer = new AnswerView(answerDiv, answers.wrong_answer, 'wrong');
   if (answers.correct_answer.option === "True"){
     correctAnswer.render();
     wrongAnswer.render();
