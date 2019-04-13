@@ -38,7 +38,9 @@ Quiz.prototype.bindEvents = function () {
 
     if (!this.questions[this.currentQuestion] ){
       this.timer.stopTimer(this.timerID);
-      PubSub.publish('Quiz:quiz-finished', this.score);
+      window.setTimeout(()=> {
+        PubSub.publish('Quiz:quiz-finished', this.score);
+      }, 800)
       return;
     };
 

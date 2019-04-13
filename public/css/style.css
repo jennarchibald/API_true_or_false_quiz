@@ -32,6 +32,22 @@ h1, form, p.error {
   color: white;
 }
 
+form, .quiz-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+input {
+  margin: 1.2em;
+  width: 20%;
+}
+
+.hidden {
+  display:none;
+}
+
 h2 {
   text-decoration:  underline;
 }
@@ -97,6 +113,10 @@ button:focus {
 .score-container {
   background-color: black;
   color: white;
+}
+
+.play-again {
+  font-size: 0.5em;
 }
 
 .red {
