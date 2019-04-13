@@ -8,14 +8,6 @@ const QuestionView = function(container, question) {
   this.div = null;
 };
 
-QuestionView.prototype.bindEvents = function () {
-  // PubSub.subscribe('Answer:answer-made', (evt) => {
-  //   if(evt.detail.questionNumber === this.question.number){
-  //     this.div.classList.add('answered');
-  //   };
-  // });
-};
-
 QuestionView.prototype.render = function () {
   const div = document.createElement('div');
   this.div = div;

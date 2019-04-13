@@ -16,4 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const quiz = new Quiz();
   quiz.bindEvents();
 
+  // const timer = new Timer(1000);
+  // const beep = (number) => {console.log(number);}
+  // const timerID = timer.startTimer(beep);
+  // window.setTimeout(timer.stopTimer, 3000, timerID);
 });

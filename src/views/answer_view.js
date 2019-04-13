@@ -1,20 +1,18 @@
 const PubSub = require('../helpers/pub_sub.js');
 
-const AnswerView = function(div, answer, result) {
+const AnswerView = function(div, answer) {
   this.div = div;
   this.answer = answer;
-  this.result = result;
   this.button = null;
 };
 
 AnswerView.prototype.bindEvents = function () {
   PubSub.subscribe('Quiz:question-answer-made', (evt) => {
     if (evt.detail.questionNumber === this.answer.questionNumber){
-    this.answer.made = true;
-    this.addClickedButtonClass();
-  };
+      this.answer.made = true;
+      this.addClickedButtonClass();
+    };
   });
-
 };
 
 

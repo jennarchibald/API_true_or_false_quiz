@@ -55,7 +55,6 @@ button:focus {
   height: 50%;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 2em;
   margin-bottom: 2em;
   padding: 10px;
   padding-bottom: 20px;
@@ -78,17 +77,26 @@ button:focus {
 @-webkit-keyframes slide {
   100% { left: 11%;}
 }
+@-webkit-keyframes display-score {
+  100% {
+    font-size: 2em;
+  }
+ }
+
+#final {
+
+  -webkit-animation: display-score 0.5s forwards;
+  -webkit-animation-delay: 3s;
+  animation: display-score 0.5s forwards;
+}
 
 .answer {
   width: 100%;
 }
 
 .score-container {
-  position: fixed;
-  width: 100%;
-  bottom: 0;
-  left: 0;
-  background-color: white;
+  background-color: black;
+  color: white;
 }
 
 .red {
