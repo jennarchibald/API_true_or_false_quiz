@@ -6,16 +6,6 @@ const AnswerView = function(div, answer) {
   this.button = null;
 };
 
-AnswerView.prototype.bindEvents = function () {
-  PubSub.subscribe('Quiz:question-answer-made', (evt) => {
-    if (evt.detail.questionNumber === this.answer.questionNumber){
-      this.answer.made = true;
-      this.addClickedButtonClass();
-    };
-  });
-};
-
-
 AnswerView.prototype.render = function () {
   const button = document.createElement('button');
   this.button = button;
@@ -24,8 +14,8 @@ AnswerView.prototype.render = function () {
   button.classList.add(`button-${this.answer.questionNumber}`)
 
   button.addEventListener('click', (evt) => {
+    this.addClickedButtonClass();
     if (!this.answer.made){
-
       this.button.classList.add('clicked');
       PubSub.publish('Answer:answer-made', this.answer);
     }

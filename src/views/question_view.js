@@ -47,9 +47,6 @@ QuestionView.prototype.displayAnswers = function () {
     wrongAnswer.render();
     correctAnswer.render();
   };
-  wrongAnswer.bindEvents();
-  correctAnswer.bindEvents();
-
 };
 
 QuestionView.prototype.getAnswers = function () {
