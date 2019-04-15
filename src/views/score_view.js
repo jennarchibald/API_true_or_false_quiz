@@ -10,6 +10,10 @@ ScoreView.prototype.bindEvents = function (){
   PubSub.subscribe('Quiz:score-updated', (evt)=> {
     this.updateScore(evt.detail);
   });
+
+  PubSub.subscribe('Quiz:quiz-finished', (evt) => {
+    this.renderFinalScore(evt.detail);
+  });
 };
 
 ScoreView.prototype.render = function (currentScore) {
@@ -28,12 +32,6 @@ ScoreView.prototype.render = function (currentScore) {
 
   PubSub.subscribe('Quiz:time-updated', (evt) => {
     time.textContent = `Time: ${evt.detail}`;
-
-  });
-
-  PubSub.subscribe('Quiz:quiz-finished', (evt) => {
-
-      this.renderFinalScore(evt.detail);
 
   });
 
