@@ -1,12 +1,11 @@
 const PubSub = require('../helpers/pub_sub.js');
-const Timer = require('../helpers/timer.js');
+const Timer = require('./timer.js');
 const RequestHelper = require('../helpers/request_helper.js');
 
 const Quiz = function () {
   this.questions = null;
   this.score = 0;
   this.timer = null;
-  this.timerID = null;
   this.currentQuestion = 0;
 };
 
@@ -14,7 +13,6 @@ Quiz.prototype.bindEvents = function () {
   PubSub.subscribe('QuizFormView:form-submitted', (evt) => {
     this.score = 0;
     this.timer = null;
-    this.timerID = null;
     this.currentQuestion = 0;
     this.getQuestions(evt.detail);
   })
@@ -37,7 +35,7 @@ Quiz.prototype.bindEvents = function () {
     this.currentQuestion++;
 
     if (!this.questions[this.currentQuestion] ){
-      this.timer.stopTimer(this.timerID);
+      this.timer.stopTimer();
       window.setTimeout(()=> {
         PubSub.publish('Quiz:quiz-finished', this.score);
       }, 800)
@@ -63,7 +61,7 @@ Quiz.prototype.getQuestions = function (number) {
 
     this.timer = new Timer(1000);
 
-    this.timerID = this.timer.startTimer((currentTime) => {
+    this.timer.startTimer((currentTime) => {
       PubSub.publish('Quiz:time-updated', currentTime);
     });
   })

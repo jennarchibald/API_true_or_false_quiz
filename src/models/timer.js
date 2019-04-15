@@ -1,5 +1,6 @@
 const Timer = function(interval){
   this.interval = interval;
+  this.id = null;
 };
 
 Timer.prototype.startTimer = function (callback) {
@@ -9,11 +10,11 @@ Timer.prototype.startTimer = function (callback) {
     callback(this.convertToMinutesAndSeconds(counter));
   }, this.interval);
 
-  return id;
+  this.id = id;
 };
 
-Timer.prototype.stopTimer = function (id) {
-  window.clearInterval(id);
+Timer.prototype.stopTimer = function () {
+  window.clearInterval(this.id);
 };
 
 

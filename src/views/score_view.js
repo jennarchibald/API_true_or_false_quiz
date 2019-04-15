@@ -1,5 +1,4 @@
 const PubSub = require('../helpers/pub_sub.js');
-const Timer = require('../helpers/timer.js');
 
 const ScoreView = function(div, numberOfQuestions){
   this.div = div;
@@ -24,11 +23,11 @@ ScoreView.prototype.render = function (currentScore) {
   this.container.appendChild(score);
 
   const time = document.createElement('p');
-  time.textContent = "0:00";
+  time.textContent = "Time: 0:00";
   this.container.appendChild(time);
 
   PubSub.subscribe('Quiz:time-updated', (evt) => {
-    time.textContent = evt.detail;
+    time.textContent = `Time: ${evt.detail}`;
 
   });
 
