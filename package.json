@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
+    "express": "^4.16.4",
     "he": "^1.2.0"
   },
   "devDependencies": {
@@ -12,7 +13,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -w"
+    "build": "webpack -w",
+    "start": "node server/server.js"
   },
   "author": "",
   "license": "ISC"
